@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modelvue"
+version = "0.2.1"
+authors = [
+    { name = "aaronchh", email = "aaronhsu219@gmail.com" },
+]
+description = "Show the configuration of hydraulic and hydrological models (Delft3D FM, EPANET, SWMM, MODFLOW, XBeach, HEC-RAS, HEC-HMS)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+# dfmvue, dfmvue23, epanetvue, swmmvue, xbvue, rasvue and hmsvue need only the standard library
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+fast = ["numpy>=1.20.0"]
+netcdf4 = ["numpy>=1.20.0", "netCDF4>=1.6.0"]
+hdf = ["h5py>=3.0"]                     # rasvue: 2D mesh and plan results HDF
+modflow = ["flopy>=3.3", "numpy>=1.20.0", "matplotlib"]
+all = ["numpy>=1.20.0", "netCDF4>=1.6.0", "flopy>=3.3", "matplotlib", "h5py>=3.0"]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+include = ["modelvue*"]
+
+[project.urls]
+Homepage = "https://github.com/AaronOET/modelvue"
+
+[project.scripts]
+modelvue-info = "modelvue.describe:main"
+modelvue = "modelvue.cli:main"
+dfmvue = "modelvue.dfmvue:main"
+dfmvue23 = "modelvue.dfmvue23:main"
+epanetvue = "modelvue.epanetvue:main"
+swmmvue = "modelvue.swmmvue:main"
+flovue = "modelvue.flovue:main"
+xbvue = "modelvue.xbvue:main"
+rasvue = "modelvue.rasvue:main"
+hmsvue = "modelvue.hmsvue:main"
+
+[tool.pytest.ini_options]
+testpaths = ["modelvue/tests"]
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E501", "E731", "E741", "E701", "E702", "F601"]

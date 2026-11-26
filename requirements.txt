@@ -1,0 +1,7 @@
+# modelvue itself needs only the Python standard library.
+# Optional: faster reading, NetCDF-4 files, and the MODFLOW reader (flovue).
+numpy>=1.20.0
+netCDF4>=1.6.0
+flopy>=3.3
+matplotlib
+h5py>=3.0
